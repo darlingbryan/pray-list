@@ -32,8 +32,8 @@ Navbar.propTypes = {
 }
 
 Navbar.defaultProps = {
-  title: 'Contact Keeper',
-  icon: 'fas fa-id-card-alt'
+  title: 'PrayerList',
+  icon: 'fas fa-praying-hands'
 }
 
 export default Navbar
