@@ -10,8 +10,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   PRAYER_ERROR,
-  FILTER_CONTACT,
-  CLEAR_FILTER
+  FILTER_PRAYERS,
+  CLEAR_FILTERS
 } from '../types'
 
 const PrayerState = props => {
@@ -81,6 +81,21 @@ const PrayerState = props => {
     dispatch({ type: CLEAR_CURRENT })
   }
 
+  //Filter Contacts
+  const filterPrayers = text => {
+    dispatch({
+      type: FILTER_PRAYERS,
+      payload: text
+    })
+  }
+
+  //Clear Filters
+  const clearFilters = () => {
+    dispatch({
+      type: CLEAR_FILTERS
+    })
+  }
+
   return (
     <PrayerContext.Provider
       value={{
@@ -92,7 +107,9 @@ const PrayerState = props => {
         deletePrayer,
         updatePrayer,
         setCurrent,
-        clearCurrent
+        clearCurrent,
+        filterPrayers,
+        clearFilters
       }}>
       {props.children}
     </PrayerContext.Provider>

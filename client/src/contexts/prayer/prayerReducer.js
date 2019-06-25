@@ -6,8 +6,8 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   PRAYER_ERROR,
-  FILTER_CONTACT,
-  CLEAR_FILTER
+  FILTER_PRAYERS,
+  CLEAR_FILTERS
 } from '../types'
 
 export default (state, action) => {
@@ -38,6 +38,19 @@ export default (state, action) => {
       return {
         ...state,
         current: null
+      }
+    case FILTER_PRAYERS:
+      return {
+        ...state,
+        filtered: state.prayers.filter(prayer => {
+          const regex = new RegExp(`${action.payload}`, 'gi')
+          return prayer.name.match(regex) || prayer.description.match(regex)
+        })
+      }
+    case CLEAR_FILTERS:
+      return {
+        ...state,
+        filtered: null
       }
     default:
       return state
