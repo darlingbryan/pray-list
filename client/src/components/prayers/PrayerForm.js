@@ -59,6 +59,7 @@ const PrayerForm = () => {
         name='name'
         placeholder='name'
         value={name}
+        required
         onChange={onChange}
       />
       <br />
