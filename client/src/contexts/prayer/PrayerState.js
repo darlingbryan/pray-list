@@ -55,6 +55,32 @@ const PrayerState = props => {
     })
   }
 
+  //Delete Prayer
+  const deletePrayer = id => {
+    dispatch({
+      type: DELETE_PRAYER,
+      payload: id
+    })
+  }
+
+  //Update Prayer
+  const updatePrayer = contact => {
+    dispatch({
+      type: UPDATE_PRAYER,
+      payload: contact
+    })
+  }
+
+  //Set Current
+  const setCurrent = contact => {
+    dispatch({ type: SET_CURRENT, payload: contact })
+  }
+
+  //Clear Current
+  const clearCurrent = () => {
+    dispatch({ type: CLEAR_CURRENT })
+  }
+
   return (
     <PrayerContext.Provider
       value={{
@@ -62,7 +88,11 @@ const PrayerState = props => {
         current: state.current,
         filtered: state.filtered,
         error: state.error,
-        addPrayer
+        addPrayer,
+        deletePrayer,
+        updatePrayer,
+        setCurrent,
+        clearCurrent
       }}>
       {props.children}
     </PrayerContext.Provider>

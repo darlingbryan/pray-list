@@ -1,8 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+import PrayerContext from '../../contexts/prayer/prayerContext'
 
 const PrayerItem = ({ prayer }) => {
-  const { name, description, answered, archive } = prayer
+  const { name, description, answered, archive, id } = prayer
+
+  const { deletePrayer, setCurrent } = useContext(PrayerContext)
+
+  const onDelete = () => {
+    deletePrayer(id)
+  }
+
   return (
     <div>
       <h3>{name}</h3>
@@ -11,6 +19,8 @@ const PrayerItem = ({ prayer }) => {
         <li>Answered: {answered ? 'Yes' : 'No'}</li>
         <li>Archive: {archive ? 'Yes' : 'No'}</li>
       </ul>
+      <button onClick={onDelete}>Delete</button>
+      <button onClick={() => setCurrent(prayer)}>Edit</button>
     </div>
   )
 }
