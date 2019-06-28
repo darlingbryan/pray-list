@@ -1,5 +1,5 @@
 import React, { Fragment, useContext } from 'react'
-import PrayerContext from '../../contexts/prayer/prayerContext'
+import PrayerContext from '../../context/prayer/prayerContext'
 import PrayerItem from './PrayerItem'
 
 const Prayers = () => {

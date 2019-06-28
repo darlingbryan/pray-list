@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react'
-import PrayerContext from '../../contexts/prayer/prayerContext'
+import PrayerContext from '../../context/prayer/prayerContext'
 
 const PrayerForm = () => {
   const { addPrayer, current, updatePrayer, clearCurrent } = useContext(

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import PrayerContext from '../../contexts/prayer/prayerContext'
+import PrayerContext from '../../context/prayer/prayerContext'
 
 const PrayerItem = ({ prayer }) => {
   const { name, description, answered, archive, id } = prayer

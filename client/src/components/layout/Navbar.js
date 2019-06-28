@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-import AuthContext from '../../contexts/auth/authContext'
+import AuthContext from '../../context/auth/authContext'
 
 const Navbar = ({ title, icon }) => {
   const { isAuthenticated, loadUser, user, logoutUser } = useContext(
