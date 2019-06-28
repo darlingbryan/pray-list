@@ -10,6 +10,7 @@ const Navbar = ({ title, icon }) => {
 
   useEffect(() => {
     loadUser()
+    // eslint-disable-next-line
   }, [])
 
   const onLogOut = () => {
@@ -20,7 +21,7 @@ const Navbar = ({ title, icon }) => {
     if (isAuthenticated) {
       return (
         <Fragment>
-          <h3>Hi {user.name}</h3>
+          <h3>Hi {user && user.name}</h3>
           <i className='fas fa-sign-out-alt' onClick={onLogOut} />
         </Fragment>
       )
