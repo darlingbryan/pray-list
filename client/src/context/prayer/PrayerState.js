@@ -10,6 +10,7 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   PRAYER_ERROR,
+  CLEAR_PRAYERS,
   FILTER_PRAYERS,
   CLEAR_FILTERS
 } from '../types'
@@ -96,6 +97,13 @@ const PrayerState = props => {
     }
   }
 
+  //Clear Prayers on State
+  const clearPrayers = () => {
+    dispatch({
+      type: CLEAR_PRAYERS
+    })
+  }
+
   //Set Current
   const setCurrent = contact => {
     dispatch({ type: SET_CURRENT, payload: contact })
@@ -132,6 +140,7 @@ const PrayerState = props => {
         addPrayer,
         deletePrayer,
         updatePrayer,
+        clearPrayers,
         setCurrent,
         clearCurrent,
         filterPrayers,

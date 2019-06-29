@@ -3,6 +3,7 @@ import {
   ADD_PRAYER,
   DELETE_PRAYER,
   UPDATE_PRAYER,
+  CLEAR_PRAYERS,
   SET_CURRENT,
   CLEAR_CURRENT,
   PRAYER_ERROR,
@@ -38,6 +39,11 @@ export default (state, action) => {
       return {
         ...state,
         error: action.payload
+      }
+    case CLEAR_PRAYERS:
+      return {
+        ...state,
+        prayers: []
       }
     case SET_CURRENT:
       return {

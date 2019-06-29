@@ -2,8 +2,10 @@ import React, { useContext, useEffect, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import AuthContext from '../../context/auth/authContext'
+import PrayerContext from '../../context/prayer/prayerContext'
 
 const Navbar = ({ title, icon }) => {
+  const { clearPrayers } = useContext(PrayerContext)
   const { isAuthenticated, loadUser, user, logoutUser } = useContext(
     AuthContext
   )
@@ -15,6 +17,7 @@ const Navbar = ({ title, icon }) => {
 
   const onLogOut = () => {
     logoutUser()
+    clearPrayers()
   }
 
   const NavLinks = () => {
