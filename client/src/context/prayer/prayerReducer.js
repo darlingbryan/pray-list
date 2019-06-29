@@ -12,6 +12,11 @@ import {
 
 export default (state, action) => {
   switch (action.type) {
+    case GET_PRAYERS:
+      return {
+        ...state,
+        prayers: action.payload
+      }
     case ADD_PRAYER:
       return {
         ...state,
@@ -20,14 +25,19 @@ export default (state, action) => {
     case DELETE_PRAYER:
       return {
         ...state,
-        prayers: state.prayers.filter(prayer => prayer.id !== action.payload)
+        prayers: state.prayers.filter(prayer => prayer._id !== action.payload)
       }
     case UPDATE_PRAYER:
       return {
         ...state,
         prayers: state.prayers.map(prayer =>
-          prayer.id === action.payload.id ? action.payload : prayer
+          prayer._id === action.payload._id ? action.payload : prayer
         )
+      }
+    case PRAYER_ERROR:
+      return {
+        ...state,
+        error: action.payload
       }
     case SET_CURRENT:
       return {

@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react'
-import uuid from 'uuid'
+import React, { useReducer, useCallback } from 'react'
+import axios from 'axios'
 import prayerReducer from './prayerReducer'
 import PrayerContext from './prayerContext'
 import {
@@ -16,29 +16,7 @@ import {
 
 const PrayerState = props => {
   const initialState = {
-    prayers: [
-      {
-        id: 1,
-        name: 'Family',
-        description: 'For our wellbeing.',
-        answered: true,
-        archive: true
-      },
-      {
-        id: 2,
-        name: 'Work',
-        description: 'A more stable job.',
-        answered: true,
-        archive: false
-      },
-      {
-        id: 3,
-        name: 'Israel',
-        description: 'For their peace',
-        answered: false,
-        archive: false
-      }
-    ],
+    prayers: [],
     current: null,
     filtered: null,
     error: null
@@ -46,29 +24,76 @@ const PrayerState = props => {
 
   const [state, dispatch] = useReducer(prayerReducer, initialState)
 
+  //Get Prayer
+  const getPrayer = useCallback(async () => {
+    try {
+      const res = await axios.get('api/prayers')
+      dispatch({
+        type: GET_PRAYERS,
+        payload: res.data
+      })
+    } catch (err) {
+      dispatch({
+        type: PRAYER_ERROR,
+        payload: err.response.msg
+      })
+    }
+  }, [])
+
   //Add Prayer
-  const addPrayer = prayer => {
-    prayer.id = uuid.v4
-    dispatch({
-      type: ADD_PRAYER,
-      payload: prayer
-    })
+  const addPrayer = async prayer => {
+    const config = {
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    try {
+      const res = await axios.post('/api/prayers', prayer, config)
+      dispatch({
+        type: ADD_PRAYER,
+        payload: res.data
+      })
+    } catch (err) {
+      dispatch({
+        type: PRAYER_ERROR,
+        payload: err.response.msg
+      })
+    }
   }
 
   //Delete Prayer
-  const deletePrayer = id => {
-    dispatch({
-      type: DELETE_PRAYER,
-      payload: id
-    })
+  const deletePrayer = async _id => {
+    try {
+      await axios.delete(`/api/prayers/${_id}`)
+      dispatch({
+        type: DELETE_PRAYER,
+        payload: _id
+      })
+    } catch (err) {
+      dispatch({
+        type: PRAYER_ERROR,
+        payload: err.msg
+      })
+    }
   }
 
   //Update Prayer
-  const updatePrayer = contact => {
-    dispatch({
-      type: UPDATE_PRAYER,
-      payload: contact
-    })
+  const updatePrayer = async prayer => {
+    const config = {
+      headers: { 'Content-Type': 'application/json' }
+    }
+
+    try {
+      const res = await axios.put(`/api/prayers/${prayer._id}`, prayer, config)
+      dispatch({
+        type: UPDATE_PRAYER,
+        payload: res.data
+      })
+    } catch (err) {
+      dispatch({
+        type: PRAYER_ERROR,
+        payload: err.msg
+      })
+    }
   }
 
   //Set Current
@@ -103,6 +128,7 @@ const PrayerState = props => {
         current: state.current,
         filtered: state.filtered,
         error: state.error,
+        getPrayer,
         addPrayer,
         deletePrayer,
         updatePrayer,

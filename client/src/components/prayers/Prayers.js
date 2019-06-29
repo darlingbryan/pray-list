@@ -1,9 +1,14 @@
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useEffect } from 'react'
 import PrayerContext from '../../context/prayer/prayerContext'
 import PrayerItem from './PrayerItem'
 
 const Prayers = () => {
-  const { prayers, filtered } = useContext(PrayerContext)
+  const { prayers, filtered, getPrayer } = useContext(PrayerContext)
+
+  useEffect(() => {
+    getPrayer()
+    // eslint-disable-next-line
+  }, [])
 
   let showPrayer
 
@@ -15,7 +20,7 @@ const Prayers = () => {
   return (
     <Fragment>
       {showPrayer.map(prayer => (
-        <PrayerItem key={prayer.id} prayer={prayer} />
+        <PrayerItem key={prayer._id} prayer={prayer} />
       ))}
     </Fragment>
   )

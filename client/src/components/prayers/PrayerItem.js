@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import PrayerContext from '../../context/prayer/prayerContext'
 
 const PrayerItem = ({ prayer }) => {
-  const { name, description, answered, archive, id } = prayer
+  const { name, description, answered, archive, _id } = prayer
 
   const { deletePrayer, setCurrent } = useContext(PrayerContext)
 
   const onDelete = () => {
-    deletePrayer(id)
+    deletePrayer(_id)
   }
 
   return (
